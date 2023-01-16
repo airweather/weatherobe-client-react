@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import loginImg from '../assets/login.png'
 import logoutImg from '../assets/logout.png'
 import mypageImg from '../assets/mypage.png'
@@ -24,10 +24,13 @@ const Header = () => {
     // else{
     //   this.$store.commit("user", {});
     // }
+    setLogin(!login);
     alert('로그아웃');
   }
 
   const [login, setLogin] = useState(false);
+
+  
 
   return (
     <header style={{borderBottom: "1px solid #ddd"}}>
@@ -58,26 +61,25 @@ const Header = () => {
             </Nav>
             <Form className="d-flex">
                 <Link  className="navbar-brand" to="/write">
-                  <img src={writeImg} width="24px" height="24px"/>
+                  <img src={writeImg} alt="write" width="24px" height="24px"/>
                 </Link>
                 <Link className="navbar-brand" to="/mypage">
-                  <img src={mypageImg} style={{width:"24px", height:"24px"}}/>
+                  <img src={mypageImg} alt="mypage" style={{width:"24px", height:"24px"}}/>
                 </Link>
                 <Link className="navbar-brand" to="/search">
-                  <img src={searchImg} style={imgStyle}/>
+                  <img src={searchImg} alt="search" style={imgStyle}/>
                 </Link>
 
                 {(login) 
                   ?
                   <Link className="navbar-brand" style={{cursor: "pointer"}} onClick={logout}>
-                      <img src={logoutImg} style={imgStyle}/> <small><b>logout</b></small>
+                      <img src={logoutImg} alt="logout" style={imgStyle}/> <small><b>logout</b></small>
                   </Link>
                   :
-                  <Link className="navbar-brand" to="/login">
-                      <img src={loginImg} style={imgStyle}/> <small><b>login</b></small>
+                  <Link className="navbar-brand" to="/login" onClick={() => {setLogin(!login)}}>
+                      <img src={loginImg} alt="login" style={imgStyle}/> <small><b>login</b></small>
                   </Link>
                 }
-                
             </Form>
           </Navbar.Collapse>
         </Container>
